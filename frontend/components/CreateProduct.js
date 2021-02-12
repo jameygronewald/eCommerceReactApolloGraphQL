@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
 import FormStyles from './styles/Form';
 import DisplayError from './ErrorMessage';
+import { ALL_PRODUCTS_QUERY } from './Products';
+import Router from 'next/router';
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -41,6 +43,7 @@ export default function CreateProduct() {
     CREATE_PRODUCT_MUTATION,
     {
       variables: inputs,
+      refetchQueries: [{ query: ALL_PRODUCTS_QUERY }],
     }
   );
 
@@ -48,11 +51,15 @@ export default function CreateProduct() {
     <FormStyles
       onSubmit={async e => {
         e.preventDefault();
-        await createProduct();
+        const res = await createProduct();
         clearForm();
+        // go to newly created product page
+        Router.push({
+          pathname: `/product/${res.data.createProduct.id}`,
+        });
       }}
     >
-      <DisplayError error={error}/>
+      <DisplayError error={error} />
       <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor='image'>
           Image
