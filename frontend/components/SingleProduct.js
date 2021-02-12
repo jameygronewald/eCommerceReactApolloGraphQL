@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const ProductStyles = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
-  grid-auto-flow: column;z
+  grid-auto-flow: column;
   max-width: var(--maxWidth);
   justify-content: center;
   align-items: center;
