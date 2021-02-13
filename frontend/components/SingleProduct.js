@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const ProductStyles = styled.div`
   display: grid;
   grid-auto-columns: 1fr;
-  grid-auto-flow: column;z
+  grid-auto-flow: column;
   max-width: var(--maxWidth);
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ const ProductStyles = styled.div`
   }
 `;
 
-const SINGLE_ITEM_QUERY = gql`
+export const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
     Product(where: { id: $id }) {
       name
