@@ -8,14 +8,13 @@ export default function Nav() {
   return (
     <NavStyles>
       <Link href='/products'>Products</Link>
-      {user && (
+      {user ? (
         <>
           <Link href='/sell'>Sell</Link>
           <Link href='/orders'>Orders</Link>
           <Link href='/account'>Account</Link>
         </>
-      )}
-      {!user && (
+      ) : (
         <>
           <Link href='/signin'>Sign In</Link>
         </>
