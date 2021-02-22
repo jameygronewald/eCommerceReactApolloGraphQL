@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import { useUser, CURRENT_USER_QUERY } from './User.js';
+import { useUser } from './User.js';
 import NavStyles from './styles/NavStyles';
+import SignOut from './SignOut.js';
 
 export default function Nav() {
   const user = useUser();
@@ -8,14 +9,14 @@ export default function Nav() {
   return (
     <NavStyles>
       <Link href='/products'>Products</Link>
-      {user && (
+      {user ? (
         <>
           <Link href='/sell'>Sell</Link>
           <Link href='/orders'>Orders</Link>
           <Link href='/account'>Account</Link>
+          <SignOut />
         </>
-      )}
-      {!user && (
+      ) : (
         <>
           <Link href='/signin'>Sign In</Link>
         </>
