@@ -7,12 +7,14 @@ import {
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
+import { CartItem } from './schemas/CartItem';
 import 'dotenv/config';
 import { insertSeedData } from './seed-data';
+import { sendPasswordResetEmail } from './lib/mail';
 
 const databaseURL =
-  /* process.env.DATABASE_URL ||  */'mongodb://localhost/reactApolloGraphQL';
-  console.log(databaseURL);
+  /* process.env.DATABASE_URL ||  */ 'mongodb://localhost/reactApolloGraphQL';
+console.log(databaseURL);
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24 * 7,
@@ -29,7 +31,7 @@ const { withAuth } = createAuth({
   },
   passwordResetLink: {
     async sendToken(args) {
-      console.log(args);
+      await sendPasswordResetEmail(args.token, args.identity);
     },
   },
 });
@@ -57,6 +59,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     ui: {
       // Show the ui only for people who pass this test
