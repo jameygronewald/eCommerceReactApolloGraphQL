@@ -11,6 +11,7 @@ import { CartItem } from './schemas/CartItem';
 import 'dotenv/config';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './lib/mail';
+import { extendGraphqlSchema } from './mutations';
 
 const databaseURL =
   /* process.env.DATABASE_URL ||  */ 'mongodb://localhost/reactApolloGraphQL';
@@ -49,7 +50,7 @@ export default withAuth(
       url: databaseURL,
       async onConnect(keystone) {
         console.log('Connected to database');
-        if (process.argv.includes('--seed-data')) {
+        if (process.argv.includes('--seed')) {
           await insertSeedData(keystone);
         }
       },
@@ -61,6 +62,7 @@ export default withAuth(
       ProductImage,
       CartItem,
     }),
+    extendGraphqlSchema,
     ui: {
       // Show the ui only for people who pass this test
       isAccessAllowed: ({ session }) => !!session?.data,

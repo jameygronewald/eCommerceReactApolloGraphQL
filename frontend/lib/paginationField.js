@@ -29,12 +29,12 @@ export default function paginationField() {
     merge(existing, incoming, { args }) {
       const { skip, first } = args;
       // this runs when client comes back from network w products
-      console.log(`Merging items from network ${incoming.length}`);
+      // console.log(`Merging items from network ${incoming.length}`);
       const merged = existing ? existing.slice(0) : [];
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log(merged);
+      // console.log(merged);
       return merged;
     },
   };
