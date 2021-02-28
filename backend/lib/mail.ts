@@ -1,5 +1,4 @@
 import { createTransport, getTestMessageUrl } from 'nodemailer';
-import { Envelope } from 'nodemailer/lib/mailer';
 
 const transport = createTransport({
   host: process.env.MAIL_HOST,
