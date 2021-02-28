@@ -11,7 +11,8 @@ import 'dotenv/config';
 import { insertSeedData } from './seed-data';
 
 const databaseURL =
-  process.env.DATABASE_URL || 'mongodb://localhost/reactApolloGraphQL';
+  /* process.env.DATABASE_URL ||  */'mongodb://localhost/reactApolloGraphQL';
+  console.log(databaseURL);
 
 const sessionConfig = {
   maxAge: 60 * 60 * 24 * 7,
